@@ -33,6 +33,9 @@
     <ClCompile Include="lve_swap_chain.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="lve_model.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lve_window.hpp">
@@ -50,15 +53,20 @@
     <ClInclude Include="lve_swap_chain.hpp">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="lve_model.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="compilecsng.bat">
       <Filter>Исходные файлы</Filter>
     </None>
-    <None Include="shaders\simple_shader.frag" />
-    <None Include="shaders\simple_shader.vert" />
     <None Include="compileLapchan.bat">
       <Filter>Исходные файлы</Filter>
     </None>
+    <None Include="shaders\simple_shader.frag" />
+    <None Include="shaders\simple_shader.frag.spv" />
+    <None Include="shaders\simple_shader.vert" />
+    <None Include="shaders\simple_shader.vert.spv" />
   </ItemGroup>
 </Project>
