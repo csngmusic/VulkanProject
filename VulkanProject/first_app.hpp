@@ -24,8 +24,14 @@ namespace lve {
 		void run();
 
 	private:
-		void sierpinski(std::vector<LveModel::Vertex> &vertices,
-			int depth, glm::vec2 left, glm::vec2 right, glm::vec2 top);
+		void sierpinski(std::vector<LveModel::Vertex>& vertices,
+			int depth,
+			glm::vec2 left,
+			glm::vec2 right,
+			glm::vec2 top,
+			glm::vec3 colorLeft,
+			glm::vec3 colorRight,
+			glm::vec3 colorTop);
 		void loadModels();
 		void createPipelineLayout();
 		void createPipeline();

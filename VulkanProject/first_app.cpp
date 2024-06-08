@@ -28,24 +28,43 @@ namespace lve {
 		int depth,
 		glm::vec2 left,
 		glm::vec2 right,
-		glm::vec2 top) {
+		glm::vec2 top,
+		glm::vec3 colorLeft,
+		glm::vec3 colorRight,
+		glm::vec3 colorTop) {
+
 		if (depth <= 0) {
-			vertices.push_back({ top });
-			vertices.push_back({ right });
-			vertices.push_back({ left });
+			vertices.push_back({ left, colorLeft });
+			vertices.push_back({ right, colorRight });
+			vertices.push_back({ top, colorTop });
 		}
 		else {
 			auto leftTop = 0.5f * (left + top);
 			auto rightTop = 0.5f * (right + top);
 			auto leftRight = 0.5f * (left + right);
-			sierpinski(vertices, depth - 1, left, leftRight, leftTop);
-			sierpinski(vertices, depth - 1, leftRight, right, rightTop);
-			sierpinski(vertices, depth - 1, leftTop, rightTop, top);
+
+			auto colorLeftTop = 0.5f * (colorLeft + colorTop);
+			auto colorRightTop = 0.5f * (colorRight + colorTop);
+			auto colorLeftRight = 0.5f * (colorLeft + colorRight);
+
+			sierpinski(vertices, depth - 1, left, leftRight, leftTop, colorLeft, colorLeftRight, colorLeftTop);
+			sierpinski(vertices, depth - 1, leftRight, right, rightTop, colorLeftRight, colorRight, colorRightTop);
+			sierpinski(vertices, depth - 1, leftTop, rightTop, top, colorLeftTop, colorRightTop, colorTop);
 		}
 	}
+
 	void FirstApp::loadModels() {
 		std::vector<LveModel::Vertex> vertices{};
-		sierpinski(vertices, 3, { -1.0f, 1.0f }, { 1.0f, 1.0f }, { 0.0f, -1.0f });
+		glm::vec2 left = { -1.0f, 1.0f };
+		glm::vec2 right = { 1.0f, 1.0f };
+		glm::vec2 top = { 0.0f, -1.0f };
+
+		// Set base colors for the vertices to create a gradient
+		glm::vec3 colorLeft = { 1.0f, 0.0f, 0.0f }; // Red
+		glm::vec3 colorRight = { 0.0f, 1.0f, 0.0f }; // Green
+		glm::vec3 colorTop = { 0.0f, 0.0f, 1.0f }; // Blue
+
+		sierpinski(vertices, 3, left, right, top, colorLeft, colorRight, colorTop);
 		lveModel = std::make_unique<LveModel>(lveDevice, vertices);
 	}
 	void FirstApp::createPipelineLayout() {
